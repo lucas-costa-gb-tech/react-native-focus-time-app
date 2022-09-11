@@ -1,13 +1,17 @@
 import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
-import { HomeScreen } from '@ui/screens';
-import { Palette } from '@utils/constants/ui';
+import { RecoilRoot } from 'recoil';
+
+import { HomeScreen } from './src/ui/screens';
+import { Palette } from './src/utils/constants/ui';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
-      <HomeScreen />
-    </SafeAreaView>
+    <RecoilRoot>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" />
+        <HomeScreen />
+      </SafeAreaView>
+    </RecoilRoot>
   );
 }
 

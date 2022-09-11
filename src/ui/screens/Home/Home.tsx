@@ -1,10 +1,20 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useRecoilState } from 'recoil';
 import { TextInput } from 'react-native-paper';
-import { RoundedButton } from '@ui/components';
+
+import { RoundedButton } from '../../components';
+import { subjectsAtom } from '../../../state/subjects';
 
 export default function HomeScreen() {
-  const [focusSubject, setFocusSubject] = React.useState('');
+  const [subjects, setSubjects] = useRecoilState(subjectsAtom);
+  const [currentSubject, setCurrentSubject] = React.useState('');
+
+  const handlePress = () => {
+    const newSubjects = subjects.concat(currentSubject);
+    setSubjects(newSubjects);
+    setCurrentSubject('');
+  };
 
   return (
     <View style={styles.container}>
@@ -12,15 +22,15 @@ export default function HomeScreen() {
         <View style={styles.textInputContainer}>
           <TextInput
             label="What would you like to focus on?"
-            value={focusSubject}
-            onChangeText={setFocusSubject}
+            value={currentSubject}
+            onChangeText={setCurrentSubject}
           />
         </View>
         <View style={styles.roundedButtonContainer}>
           <RoundedButton
             title="+"
             size={50}
-            onPress={() => undefined}
+            onPress={handlePress}
           />
         </View>
       </View>

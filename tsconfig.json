@@ -16,6 +16,7 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
+      "@state/*": ["src/state/*"],
       "@ui/*": ["src/ui/*"],
       "@utils/*": ["src/utils/*"]
     },

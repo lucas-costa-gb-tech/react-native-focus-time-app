@@ -16,7 +16,8 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
-      "@ui/*": ["src/ui/*"]
+      "@ui/*": ["src/ui/*"],
+      "@utils/*": ["src/utils/*"]
     },
     "strict": true,
     "target": "esnext"

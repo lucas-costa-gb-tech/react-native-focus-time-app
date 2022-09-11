@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { HomeScreen } from '@ui/screens';
-import { Palette } from './src/utils/constants/style';
+import { Palette } from '@utils/constants/ui';
 
 export default function App() {
   return (

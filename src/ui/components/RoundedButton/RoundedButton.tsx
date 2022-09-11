@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, GestureResponderEvent } from 'react-native';
-import { Palette } from '../../utils/constants/style';
+import { Palette } from '@utils/constants/ui';
 
 interface RoundedButtonProps {
   title: string;

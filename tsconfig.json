@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react-native",
@@ -14,6 +15,9 @@
     ],
     "moduleResolution": "node",
     "noEmit": true,
+    "paths": {
+      "@ui/*": ["src/ui/*"]
+    },
     "strict": true,
     "target": "esnext"
   },

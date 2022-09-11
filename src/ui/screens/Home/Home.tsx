@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
-
-import { RoundedButton } from '../../components';
+import { RoundedButton } from '@ui/components';
 
 export default function HomeScreen() {
   const [focusSubject, setFocusSubject] = React.useState('');

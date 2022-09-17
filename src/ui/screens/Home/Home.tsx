@@ -8,7 +8,7 @@ import { subjectsAtom } from '../../../state/subjects';
 
 export default function HomeScreen() {
   const [subjects, setSubjects] = useRecoilState(subjectsAtom);
-  const [currentSubject, setCurrentSubject] = React.useState('');
+  const [currentSubject, setCurrentSubject] = React.useState<string>('');
 
   const handlePress = () => {
     const newSubjects = subjects.concat(currentSubject);

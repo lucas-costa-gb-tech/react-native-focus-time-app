@@ -1,20 +1,11 @@
 import { RecoilRoot } from 'recoil';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { FocusedSubject, Home } from './src/ui/screens';
-
-const Stack = createNativeStackNavigator();
+import { Navigator } from './src/navigation';
 
 export default function App() {
   return (
     <RecoilRoot>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="FocusedSubject" component={FocusedSubject} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Navigator />
     </RecoilRoot>
   );
 }

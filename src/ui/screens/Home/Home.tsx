@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { TextInput } from 'react-native-paper';
 
+import { Basic } from '../../templates';
 import { RoundedButton } from '../../components';
 import { subjectsAtom } from '../../../state/subjects';
 
@@ -17,24 +18,26 @@ export default function HomeScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.textInputRow}>
-        <View style={styles.textInputContainer}>
-          <TextInput
-            label="What would you like to focus on?"
-            value={currentSubject}
-            onChangeText={setCurrentSubject}
-          />
-        </View>
-        <View style={styles.roundedButtonContainer}>
-          <RoundedButton
-            title="+"
-            size={50}
-            onPress={handlePress}
-          />
+    <Basic>
+      <View style={styles.container}>
+        <View style={styles.textInputRow}>
+          <View style={styles.textInputContainer}>
+            <TextInput
+              label="What would you like to focus on?"
+              value={currentSubject}
+              onChangeText={setCurrentSubject}
+            />
+          </View>
+          <View style={styles.roundedButtonContainer}>
+            <RoundedButton
+              title="+"
+              size={50}
+              onPress={handlePress}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </Basic>
   );
 }
 

@@ -7,7 +7,13 @@ import { Basic } from '../../templates';
 import { RoundedButton } from '../../components';
 import { subjectsAtom } from '../../../state/subjects';
 
-export default function Home() {
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import type { StackParamList } from '../../../navigation';
+
+type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
+
+export default function Home({ navigation }: HomeProps) {
   const [subjects, setSubjects] = useRecoilState(subjectsAtom);
   const [currentSubject, setCurrentSubject] = React.useState<string>('');
 
@@ -15,6 +21,7 @@ export default function Home() {
     const newSubjects = subjects.concat(currentSubject);
     setSubjects(newSubjects);
     setCurrentSubject('');
+    navigation.navigate('FocusedSubject');
   };
 
   return (

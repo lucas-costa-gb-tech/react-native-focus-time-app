@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import { Platform, StyleSheet, StatusBar } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import { Palette } from '../../../utils/constants/ui';
 
@@ -19,7 +20,7 @@ export default function Basic({ children }: BasicProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     backgroundColor: Palette.PrimaryMain,
   },
 });

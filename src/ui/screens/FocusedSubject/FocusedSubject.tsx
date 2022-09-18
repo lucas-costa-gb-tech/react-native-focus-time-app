@@ -1,9 +1,8 @@
-// import * as React from 'react';
 import { Text, View } from 'react-native';
 
 import { Basic } from '../../templates';
 
-export default function FocusedSubjectScreen() {
+export default function FocusedSubject() {
   return (
     <Basic>
       <View>

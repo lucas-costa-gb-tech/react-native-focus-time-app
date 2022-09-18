@@ -1,2 +1,2 @@
-export { default as FocusedSubjectScreen } from './FocusedSubject';
-export { default as HomeScreen } from './Home';
+export { default as FocusedSubject } from './FocusedSubject';
+export { default as Home } from './Home';

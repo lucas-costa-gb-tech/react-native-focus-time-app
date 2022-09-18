@@ -7,7 +7,7 @@ import { Basic } from '../../templates';
 import { RoundedButton } from '../../components';
 import { subjectsAtom } from '../../../state/subjects';
 
-export default function HomeScreen() {
+export default function Home() {
   const [subjects, setSubjects] = useRecoilState(subjectsAtom);
   const [currentSubject, setCurrentSubject] = React.useState<string>('');
 

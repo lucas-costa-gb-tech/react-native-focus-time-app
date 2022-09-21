@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { useRecoilValue } from 'recoil';
 
+import { subjectsAtom } from '../../../state/subjects';
+import { Palette } from '../../../utils/constants/ui';
 import { Basic } from '../../templates';
 import { Countdown, RoundedButton } from '../../components';
 
 export default function FocusedSubject() {
+  const subjects = useRecoilValue(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
 
   const handleProgress = () => {};
@@ -29,18 +33,22 @@ export default function FocusedSubject() {
             onProgress={handleProgress}
             onEnd={handleEnd}
           />
+          <View style={styles.subjectContainer}>
+            <Text style={styles.subjectTitle}>Focando em:</Text>
+            <Text style={styles.subjectText}>{subjects[subjects.length - 1]}</Text>
+          </View>
         </View>
         <View style={styles.buttonContainer}>
           {isStarted ? (
             <RoundedButton
               size={125}
-              title="pause"
+              title="pausar"
               onPress={handlePause}
             />
           ) : (
             <RoundedButton
               size={125}
-              title="start"
+              title="iniciar"
               onPress={handleStart}
             />
           )}
@@ -58,6 +66,19 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  subjectContainer: {
+    paddingTop: 24,
+  },
+  subjectTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Palette.PrimaryContrastText,
+    textAlign: 'center',
+  },
+  subjectText: {
+    color: Palette.PrimaryContrastText,
+    textAlign: 'center',
   },
   buttonContainer: {
     flex: 0.3,

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, StatusBar } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 
-import { Palette } from '../../../utils/constants/ui';
+import { palette } from '../../../utils/constants/ui';
 
 interface BasicProps {
   children: React.ReactNode;
@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    backgroundColor: Palette.PrimaryMain,
+    backgroundColor: palette.primary.main,
   },
 });

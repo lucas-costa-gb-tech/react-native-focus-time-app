@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import { Palette } from '../../../utils/constants/ui';
+import { palette } from '../../../utils/constants/ui';
 
 interface CountdownProps {
   minutes?: number;
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 80,
     fontWeight: 'bold',
-    color: Palette.PrimaryContrastText,
+    color: palette.primary.contrastText,
     padding: 24,
     backgroundColor: 'rgba(94, 132, 226, 0.3)',
   },

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, GestureResponderEvent } from 'react-native';
 
-import { Palette } from '../../../utils/constants/ui';
+import { palette } from '../../../utils/constants/ui';
 
 interface RoundedButtonProps {
   title: string;
@@ -21,13 +21,13 @@ const styles = (props: RoundedButtonProps) => StyleSheet.create({
     width: props.size,
     height: props.size,
     borderWidth: 2,
-    borderColor: Palette.PrimaryContrastText,
+    borderColor: palette.primary.contrastText,
     borderRadius: props.size / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
     fontSize: props.size / 4,
-    color: Palette.PrimaryContrastText,
+    color: palette.primary.contrastText,
   },
 });

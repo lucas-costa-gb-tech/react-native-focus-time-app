@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useRecoilValue } from 'recoil';
+import { ProgressBar } from 'react-native-paper';
 
 import { subjectsAtom } from '../../../state/subjects';
-import { Palette } from '../../../utils/constants/ui';
+import { palette } from '../../../utils/constants/ui';
 import { Basic } from '../../templates';
 import { Countdown, RoundedButton } from '../../components';
 
 export default function FocusedSubject() {
   const subjects = useRecoilValue(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
-
-  const handleProgress = () => {};
+  const [progress, setProgress] = useState<number>(0);
 
   const handleEnd = () => {};
 
@@ -30,12 +30,19 @@ export default function FocusedSubject() {
           <Countdown
             minutes={1}
             isPaused={!isStarted}
-            onProgress={handleProgress}
+            onProgress={setProgress}
             onEnd={handleEnd}
           />
           <View style={styles.subjectContainer}>
             <Text style={styles.subjectTitle}>Focando em:</Text>
             <Text style={styles.subjectText}>{subjects[subjects.length - 1]}</Text>
+          </View>
+          <View style={styles.progressBarContainer}>
+            <ProgressBar
+              style={styles.progressBar}
+              progress={progress}
+              color={palette.primary.light}
+            />
           </View>
         </View>
         <View style={styles.buttonContainer}>
@@ -68,17 +75,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   subjectContainer: {
-    paddingTop: 24,
+    width: '100%',
+    paddingTop: 20,
   },
   subjectTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: Palette.PrimaryContrastText,
+    color: palette.primary.contrastText,
     textAlign: 'center',
   },
   subjectText: {
-    color: Palette.PrimaryContrastText,
+    color: palette.primary.contrastText,
     textAlign: 'center',
+  },
+  progressBarContainer: {
+    width: '100%',
+    paddingTop: 20,
+    paddingHorizontal: 40,
+  },
+  progressBar: {
+    height: 10,
   },
   buttonContainer: {
     flex: 0.3,

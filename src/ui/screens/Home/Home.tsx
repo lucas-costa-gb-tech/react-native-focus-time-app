@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { TextInput } from 'react-native-paper';
 
+import { subjectsAtom } from '../../../state/subjects';
 import { Basic } from '../../templates';
 import { RoundedButton } from '../../components';
-import { subjectsAtom } from '../../../state/subjects';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -15,7 +15,7 @@ type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 
 export default function Home({ navigation }: HomeProps) {
   const [subjects, setSubjects] = useRecoilState(subjectsAtom);
-  const [currentSubject, setCurrentSubject] = React.useState<string>('');
+  const [currentSubject, setCurrentSubject] = useState<string>('');
 
   const handlePress = () => {
     const newSubjects = subjects.concat(currentSubject);
@@ -30,7 +30,7 @@ export default function Home({ navigation }: HomeProps) {
         <View style={styles.textInputRow}>
           <View style={styles.textInputContainer}>
             <TextInput
-              label="What would you like to focus on?"
+              label="No que deseja focar?"
               value={currentSubject}
               onChangeText={setCurrentSubject}
             />

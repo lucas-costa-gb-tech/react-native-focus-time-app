@@ -27,7 +27,7 @@ const styles = (props: RoundedButtonProps) => StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontSize: props.size / 3,
+    fontSize: props.size / 4,
     color: Palette.PrimaryContrastText,
   },
 });

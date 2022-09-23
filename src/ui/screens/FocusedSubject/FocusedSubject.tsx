@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Vibration, View } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { ProgressBar } from 'react-native-paper';
 
@@ -14,7 +14,9 @@ export default function FocusedSubject() {
   const [minutes, setMinutes] = useState<number>(0.5);
   const [progress, setProgress] = useState<number>(1);
 
-  const handleEnd = () => {};
+  const handleEnd = () => {
+    Vibration.vibrate();
+  };
 
   const handleStart = () => {
     setIsStarted(true);

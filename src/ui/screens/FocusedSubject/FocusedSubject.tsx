@@ -11,8 +11,8 @@ import { Countdown, RoundedButton } from '../../components';
 export default function FocusedSubject() {
   const subjects = useRecoilValue(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
-  const [minutes, setMinutes] = useState<number>(0.1);
-  const [progress, setProgress] = useState<number>(0);
+  const [minutes, setMinutes] = useState<number>(0.5);
+  const [progress, setProgress] = useState<number>(1);
 
   const handleEnd = () => {};
 
@@ -22,6 +22,18 @@ export default function FocusedSubject() {
 
   const handlePause = () => {
     setIsStarted(false);
+  };
+
+  const setFive = () => {
+    setMinutes(5);
+  };
+
+  const setTen = () => {
+    setMinutes(10);
+  };
+
+  const setTwenty = () => {
+    setMinutes(20);
   };
 
   return (
@@ -45,6 +57,23 @@ export default function FocusedSubject() {
               color={palette.primary.light}
             />
           </View>
+        </View>
+        <View style={styles.timingContainer}>
+          <RoundedButton
+            size={75}
+            title="5"
+            onPress={setFive}
+          />
+          <RoundedButton
+            size={75}
+            title="10"
+            onPress={setTen}
+          />
+          <RoundedButton
+            size={75}
+            title="20"
+            onPress={setTwenty}
+          />
         </View>
         <View style={styles.buttonContainer}>
           {isStarted ? (
@@ -96,6 +125,13 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 10,
+  },
+  timingContainer: {
+    flex: 0.2,
+    flexDirection: 'row',
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   buttonContainer: {
     flex: 0.3,

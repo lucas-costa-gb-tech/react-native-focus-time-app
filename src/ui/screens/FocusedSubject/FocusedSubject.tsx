@@ -11,6 +11,7 @@ import { Countdown, RoundedButton } from '../../components';
 export default function FocusedSubject() {
   const subjects = useRecoilValue(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [minutes, setMinutes] = useState<number>(0.1);
   const [progress, setProgress] = useState<number>(0);
 
   const handleEnd = () => {};
@@ -28,7 +29,7 @@ export default function FocusedSubject() {
       <View style={styles.container}>
         <View style={styles.countdownContainer}>
           <Countdown
-            minutes={1}
+            minutes={minutes}
             isPaused={!isStarted}
             onProgress={setProgress}
             onEnd={handleEnd}

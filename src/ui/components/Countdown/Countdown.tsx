@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import { palette } from '../../../utils/constants/ui';
 
 interface CountdownProps {
-  minutes?: number;
+  minutes: number;
   isPaused: boolean;
   onProgress: (num: number) => void;
   onEnd: () => void;
@@ -13,9 +13,9 @@ interface CountdownProps {
 const minutesToMillis = (min: number) => min * 1000 * 60;
 const formatTime = (time: number) => (time < 10 ? `0${time}` : time.toString());
 
-export default function Countdown ({ minutes = 0.1, isPaused, onProgress, onEnd }: CountdownProps) {
-  const interval = React.useRef<number | null>(null);
-  const [millis, setMillis] = React.useState<number>(0);
+export default function Countdown ({ minutes, isPaused, onProgress, onEnd }: CountdownProps) {
+  const interval = useRef<number | null>(null);
+  const [millis, setMillis] = useState<number>(0);
 
   const minute = Math.floor(millis / 1000 / 60) % 60;
   const seconds = Math.floor(millis / 1000) % 60;
@@ -32,15 +32,15 @@ export default function Countdown ({ minutes = 0.1, isPaused, onProgress, onEnd 
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMillis(minutesToMillis(minutes));
   }, [minutes]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     onProgress(millis / minutesToMillis(minutes));
   }, [millis]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isPaused) {
       if (interval.current) clearInterval(interval.current);
       return;

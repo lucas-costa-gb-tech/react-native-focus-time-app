@@ -5,7 +5,9 @@ import { FocusedSubject, Home } from '../../ui/screens';
 
 export type StackParamList = {
   Home: undefined;
-  FocusedSubject: undefined;
+  FocusedSubject: {
+    subjectIndex: number;
+  };
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();

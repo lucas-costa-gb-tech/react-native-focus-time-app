@@ -8,7 +8,14 @@ import { palette } from '../../../utils/constants/ui';
 import { Basic } from '../../templates';
 import { Countdown, RoundedButton } from '../../components';
 
-export default function FocusedSubject() {
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import type { StackParamList } from '../../../navigation';
+
+type FocusedSubjectProps = NativeStackScreenProps<StackParamList, 'FocusedSubject'>;
+
+export default function FocusedSubject({ route }: FocusedSubjectProps) {
+  const { subjectIndex } = route.params;
   const subjects = useRecoilValue(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [minutes, setMinutes] = useState<number>(0.5);
@@ -40,7 +47,7 @@ export default function FocusedSubject() {
 
   return (
     <Basic>
-      <View style={styles.container}>
+      <View style={styles.screenContainer}>
         <View style={styles.countdownContainer}>
           <Countdown
             minutes={minutes}
@@ -50,7 +57,7 @@ export default function FocusedSubject() {
           />
           <View style={styles.subjectContainer}>
             <Text style={styles.subjectTitle}>Focando em:</Text>
-            <Text style={styles.subjectText}>{subjects[subjects.length - 1]}</Text>
+            <Text style={styles.subjectText}>{subjects[subjectIndex]}</Text>
           </View>
           <View style={styles.progressBarContainer}>
             <ProgressBar
@@ -98,7 +105,7 @@ export default function FocusedSubject() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
   },
   countdownContainer: {

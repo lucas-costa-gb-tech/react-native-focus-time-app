@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { TextInput } from 'react-native-paper';
 
@@ -21,12 +21,12 @@ export default function Home({ navigation }: HomeProps) {
     const newSubjects = subjects.concat(currentSubject);
     setSubjects(newSubjects);
     setCurrentSubject('');
-    navigation.navigate('FocusedSubject');
+    navigation.navigate('FocusedSubject', { subjectIndex: newSubjects.length - 1 });
   };
 
   return (
     <Basic>
-      <View style={styles.container}>
+      <View style={styles.screenContainer}>
         <View style={styles.textInputRow}>
           <View style={styles.textInputContainer}>
             <TextInput
@@ -43,13 +43,16 @@ export default function Home({ navigation }: HomeProps) {
             />
           </View>
         </View>
+        <View style={styles.subjectsContainer}>
+          {subjects.map((subject) => <Text key={subject} style={{ color: 'white' }}>{subject}</Text>)}
+        </View>
       </View>
     </Basic>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
     alignContent: 'flex-start',
   },
@@ -65,4 +68,5 @@ const styles = StyleSheet.create({
   roundedButtonContainer: {
     justifyContent: 'center',
   },
+  subjectsContainer: {},
 });

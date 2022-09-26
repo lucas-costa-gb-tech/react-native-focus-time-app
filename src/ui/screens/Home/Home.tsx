@@ -10,17 +10,23 @@ import { RoundedButton } from '../../components';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import type { StackParamList } from '../../../navigation';
+import type { SubjectItem } from '../../../state/subjects/types';
 
 type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 
 export default function Home({ navigation }: HomeProps) {
   const [subjects, setSubjects] = useRecoilState(subjectsAtom);
-  const [currentSubject, setCurrentSubject] = useState<string>('');
+  const [subjectTitle, setSubjectTitle] = useState<string>('');
 
   const handlePress = () => {
-    const newSubjects = subjects.concat(currentSubject);
+    const subjectToAdd = {
+      id: 0,
+      title: subjectTitle,
+      isDone: false,
+    } as SubjectItem;
+    const newSubjects = subjects.concat(subjectToAdd);
     setSubjects(newSubjects);
-    setCurrentSubject('');
+    setSubjectTitle('');
     navigation.navigate('FocusedSubject', { subjectIndex: newSubjects.length - 1 });
   };
 
@@ -31,8 +37,8 @@ export default function Home({ navigation }: HomeProps) {
           <View style={styles.textInputContainer}>
             <TextInput
               label="No que deseja focar?"
-              value={currentSubject}
-              onChangeText={setCurrentSubject}
+              value={subjectTitle}
+              onChangeText={setSubjectTitle}
             />
           </View>
           <View style={styles.roundedButtonContainer}>
@@ -44,7 +50,7 @@ export default function Home({ navigation }: HomeProps) {
           </View>
         </View>
         <View style={styles.subjectsContainer}>
-          {subjects.map((subject) => <Text key={subject} style={{ color: 'white' }}>{subject}</Text>)}
+          {subjects.map(({ title }) => <Text key={title} style={{ color: 'white' }}>{title}</Text>)}
         </View>
       </View>
     </Basic>

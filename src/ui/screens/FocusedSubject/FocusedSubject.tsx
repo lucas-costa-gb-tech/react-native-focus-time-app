@@ -57,7 +57,7 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
           />
           <View style={styles.subjectContainer}>
             <Text style={styles.subjectTitle}>Focando em:</Text>
-            <Text style={styles.subjectText}>{subjects[subjectIndex]}</Text>
+            <Text style={styles.subjectText}>{subjects[subjectIndex].title}</Text>
           </View>
           <View style={styles.progressBarContainer}>
             <ProgressBar

@@ -6,7 +6,7 @@ import { FocusedSubject, Home } from '../../ui/screens';
 export type StackParamList = {
   Home: undefined;
   FocusedSubject: {
-    subjectIndex: number;
+    subjectId: string;
   };
 };
 

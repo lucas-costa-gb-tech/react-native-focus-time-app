@@ -1,5 +1,5 @@
 export type SubjectItem = {
-  id: number;
+  id: string;
   title: string;
   isDone: boolean;
 };

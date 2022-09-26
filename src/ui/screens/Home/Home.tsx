@@ -1,7 +1,9 @@
+import 'react-native-get-random-values';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { TextInput } from 'react-native-paper';
+import { v4 as uuidv4 } from 'uuid';
 
 import { subjectsAtom } from '../../../state/subjects';
 import { Basic } from '../../templates';
@@ -19,15 +21,16 @@ export default function Home({ navigation }: HomeProps) {
   const [subjectTitle, setSubjectTitle] = useState<string>('');
 
   const handlePress = () => {
-    const subjectToAdd = {
-      id: 0,
+    const currentSubjectId = uuidv4();
+    const currentSubject = {
+      id: currentSubjectId,
       title: subjectTitle,
       isDone: false,
     } as SubjectItem;
-    const newSubjects = subjects.concat(subjectToAdd);
+    const newSubjects = subjects.concat(currentSubject);
     setSubjects(newSubjects);
     setSubjectTitle('');
-    navigation.navigate('FocusedSubject', { subjectIndex: newSubjects.length - 1 });
+    navigation.navigate('FocusedSubject', { subjectId: currentSubjectId });
   };
 
   return (
@@ -50,7 +53,7 @@ export default function Home({ navigation }: HomeProps) {
           </View>
         </View>
         <View style={styles.subjectsContainer}>
-          {subjects.map(({ title }) => <Text key={title} style={{ color: 'white' }}>{title}</Text>)}
+          {subjects.map(({ id, title }) => <Text key={id} style={{ color: 'white' }}>{title}</Text>)}
         </View>
       </View>
     </Basic>

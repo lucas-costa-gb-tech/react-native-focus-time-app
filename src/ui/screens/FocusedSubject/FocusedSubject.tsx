@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, Vibration, View } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { ProgressBar } from 'react-native-paper';
@@ -15,11 +15,13 @@ import type { StackParamList } from '../../../navigation';
 type FocusedSubjectProps = NativeStackScreenProps<StackParamList, 'FocusedSubject'>;
 
 export default function FocusedSubject({ route }: FocusedSubjectProps) {
-  const { subjectIndex } = route.params;
+  const { subjectId } = route.params;
   const subjects = useRecoilValue(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [minutes, setMinutes] = useState<number>(0.5);
   const [progress, setProgress] = useState<number>(1);
+
+  const currentSubject = subjects.find(({ id }) => id === subjectId);
 
   const handleEnd = () => {
     Vibration.vibrate();
@@ -57,7 +59,7 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
           />
           <View style={styles.subjectContainer}>
             <Text style={styles.subjectTitle}>Focando em:</Text>
-            <Text style={styles.subjectText}>{subjects[subjectIndex].title}</Text>
+            <Text style={styles.subjectText}>{currentSubject?.title}</Text>
           </View>
           <View style={styles.progressBarContainer}>
             <ProgressBar

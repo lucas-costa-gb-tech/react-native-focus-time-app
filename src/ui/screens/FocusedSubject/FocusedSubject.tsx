@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, Vibration, View } from 'react-native';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { ProgressBar } from 'react-native-paper';
 
 import { subjectsAtom } from '../../../state/subjects';
@@ -16,7 +16,7 @@ type FocusedSubjectProps = NativeStackScreenProps<StackParamList, 'FocusedSubjec
 
 export default function FocusedSubject({ route }: FocusedSubjectProps) {
   const { subjectId } = route.params;
-  const subjects = useRecoilValue(subjectsAtom);
+  const [subjects, setSubjects] = useRecoilState(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [minutes, setMinutes] = useState<number>(0.5);
   const [progress, setProgress] = useState<number>(1);
@@ -24,6 +24,16 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
   const currentSubject = subjects.find(({ id }) => id === subjectId);
 
   const handleEnd = () => {
+    const updatedSubjects = subjects.map((subject) => {
+      if (subject.id === subjectId) {
+        return {
+          ...subject,
+          isDone: true,
+        };
+      }
+      return subject;
+    });
+    setSubjects(updatedSubjects);
     Vibration.vibrate();
   };
 

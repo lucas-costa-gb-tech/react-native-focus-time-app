@@ -11,19 +11,21 @@ import { Countdown, RoundedButton } from '../../components';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import type { StackParamList } from '../../../navigation';
+import type { CountdownProps } from '../../components';
+import type { RoundedButtonProps } from '../../components';
 
-type FocusedSubjectProps = NativeStackScreenProps<StackParamList, 'FocusedSubject'>;
+export type FocusedSubjectProps = NativeStackScreenProps<StackParamList, 'FocusedSubject'>;
 
 export default function FocusedSubject({ route }: FocusedSubjectProps) {
   const { subjectId } = route.params;
   const [subjects, setSubjects] = useRecoilState(subjectsAtom);
   const [isStarted, setIsStarted] = useState<boolean>(false);
-  const [minutes, setMinutes] = useState<number>(0.5);
+  const [minutes, setMinutes] = useState<number>(0.25);
   const [progress, setProgress] = useState<number>(1);
 
   const currentSubject = subjects.find(({ id }) => id === subjectId);
 
-  const handleEnd = () => {
+  const handleEnd: CountdownProps['onEnd'] = () => {
     const updatedSubjects = subjects.map((subject) => {
       if (subject.id === subjectId) {
         return {
@@ -37,23 +39,23 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
     Vibration.vibrate();
   };
 
-  const handleStart = () => {
+  const handleStart: RoundedButtonProps['onPress'] = () => {
     setIsStarted(true);
   };
 
-  const handlePause = () => {
+  const handlePause: RoundedButtonProps['onPress'] = () => {
     setIsStarted(false);
   };
 
-  const setFive = () => {
+  const setFive: RoundedButtonProps['onPress'] = () => {
     setMinutes(5);
   };
 
-  const setTen = () => {
+  const setTen: RoundedButtonProps['onPress'] = () => {
     setMinutes(10);
   };
 
-  const setTwenty = () => {
+  const setTwenty: RoundedButtonProps['onPress'] = () => {
     setMinutes(20);
   };
 

@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, GestureResponderEvent } from 'react
 
 import { palette } from '../../../utils/constants/ui';
 
-interface RoundedButtonProps {
+export type RoundedButtonProps = {
   title: string;
   size: number;
   onPress: (event: GestureResponderEvent) => void | undefined;

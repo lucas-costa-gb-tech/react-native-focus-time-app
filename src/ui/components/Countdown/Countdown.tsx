@@ -3,7 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 
 import { palette } from '../../../utils/constants/ui';
 
-interface CountdownProps {
+export type CountdownProps = {
   minutes: number;
   isPaused: boolean;
   onProgress: (num: number) => void;

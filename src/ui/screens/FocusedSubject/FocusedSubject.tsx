@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, Vibration, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { ProgressBar } from 'react-native-paper';
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { subjectsAtom } from '../../../state/subjects';
 import { palette } from '../../../utils/constants/ui';
@@ -26,6 +27,7 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
   const currentSubject = subjects.find(({ id }) => id === subjectId);
 
   const handleEnd: CountdownProps['onEnd'] = () => {
+    setIsStarted(false);
     const updatedSubjects = subjects.map((subject) => {
       if (subject.id === subjectId) {
         return {
@@ -58,6 +60,14 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
   const setTwenty: RoundedButtonProps['onPress'] = () => {
     setMinutes(20);
   };
+
+  useEffect(() => {
+    if (isStarted) {
+      activateKeepAwake();
+    } else {
+      deactivateKeepAwake();
+    }
+  }, [isStarted]);
 
   return (
     <Basic>

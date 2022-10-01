@@ -69,6 +69,7 @@ export default function Home({ navigation }: HomeProps) {
           </View>
         </View>
         <FlatList
+          style={styles.subjectsContainer}
           data={subjects}
           renderItem={renderItem}
           keyExtractor={({ id }) => id}
@@ -94,5 +95,8 @@ const styles = StyleSheet.create({
   },
   roundedButtonContainer: {
     justifyContent: 'center',
+  },
+  subjectsContainer: {
+    flex: 1,
   },
 });

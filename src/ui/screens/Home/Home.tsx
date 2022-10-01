@@ -1,8 +1,8 @@
 import 'react-native-get-random-values';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useRecoilState } from 'recoil';
-import { TextInput } from 'react-native-paper';
+import { Checkbox, TextInput } from 'react-native-paper';
 import { v4 as uuidv4 } from 'uuid';
 
 import { subjectsAtom } from '../../../state/subjects';
@@ -23,15 +23,19 @@ export default function Home({ navigation }: HomeProps) {
 
   const handlePress: RoundedButtonProps['onPress'] = () => {
     const currentSubjectId = uuidv4();
-    const currentSubject = {
+    const currentSubject: SubjectItem = {
       id: currentSubjectId,
       title: subjectTitle,
       isDone: false,
-    } as SubjectItem;
+    };
     const newSubjects = subjects.concat(currentSubject);
     setSubjects(newSubjects);
     setSubjectTitle('');
     navigation.navigate('FocusedSubject', { subjectId: currentSubjectId });
+  };
+
+  const handlePressCheckbox = (subjectId: string) => {
+    navigation.navigate('FocusedSubject', { subjectId });
   };
 
   return (
@@ -53,8 +57,17 @@ export default function Home({ navigation }: HomeProps) {
             />
           </View>
         </View>
-        <View style={styles.subjectsContainer}>
-          {subjects.map(({ id, title }) => <Text key={id} style={{ color: 'white' }}>{title}</Text>)}
+        <View>
+          {subjects.map(({ id, title, isDone }) => (
+            <Checkbox.Item
+              key={id}
+              label={title}
+              status={isDone ? 'checked' : 'unchecked'}
+              onPress={() => {
+                handlePressCheckbox(id);
+              }}
+            />
+          ))}
         </View>
       </View>
     </Basic>
@@ -78,5 +91,4 @@ const styles = StyleSheet.create({
   roundedButtonContainer: {
     justifyContent: 'center',
   },
-  subjectsContainer: {},
 });

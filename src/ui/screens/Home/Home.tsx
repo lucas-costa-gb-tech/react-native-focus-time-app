@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { Checkbox, TextInput } from 'react-native-paper';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,6 +9,7 @@ import { subjectsAtom } from '../../../state/subjects';
 import { Basic } from '../../templates';
 import { RoundedButton } from '../../components';
 
+import type { ListRenderItem } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import type { StackParamList } from '../../../navigation';
@@ -38,6 +39,16 @@ export default function Home({ navigation }: HomeProps) {
     navigation.navigate('FocusedSubject', { subjectId });
   };
 
+  const renderItem: ListRenderItem<SubjectItem> = ({ item: { id, title, isDone} }) => (
+    <Checkbox.Item
+      label={title}
+      status={isDone ? 'checked' : 'unchecked'}
+      onPress={() => {
+        handlePressCheckbox(id);
+      }}
+    />
+  );
+
   return (
     <Basic>
       <View style={styles.screenContainer}>
@@ -57,18 +68,11 @@ export default function Home({ navigation }: HomeProps) {
             />
           </View>
         </View>
-        <View>
-          {subjects.map(({ id, title, isDone }) => (
-            <Checkbox.Item
-              key={id}
-              label={title}
-              status={isDone ? 'checked' : 'unchecked'}
-              onPress={() => {
-                handlePressCheckbox(id);
-              }}
-            />
-          ))}
-        </View>
+        <FlatList
+          data={subjects}
+          renderItem={renderItem}
+          keyExtractor={({ id }) => id}
+        />
       </View>
     </Basic>
   );

@@ -12,8 +12,6 @@ import { Countdown, RoundedButton } from '../../components';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import type { StackParamList } from '../../../navigation';
-import type { CountdownProps } from '../../components';
-import type { RoundedButtonProps } from '../../components';
 
 export type FocusedSubjectProps = NativeStackScreenProps<StackParamList, 'FocusedSubject'>;
 
@@ -26,7 +24,7 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
 
   const currentSubject = subjects.find(({ id }) => id === subjectId);
 
-  const handleEnd: CountdownProps['onEnd'] = () => {
+  const handleEnd = () => {
     setIsStarted(false);
     const updatedSubjects = subjects.map((subject) => {
       if (subject.id === subjectId) {
@@ -41,24 +39,16 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
     Vibration.vibrate();
   };
 
-  const handleStart: RoundedButtonProps['onPress'] = () => {
+  const handleStart = () => {
     setIsStarted(true);
   };
 
-  const handlePause: RoundedButtonProps['onPress'] = () => {
+  const handlePause = () => {
     setIsStarted(false);
   };
 
-  const setFive: RoundedButtonProps['onPress'] = () => {
-    setMinutes(5);
-  };
-
-  const setTen: RoundedButtonProps['onPress'] = () => {
-    setMinutes(10);
-  };
-
-  const setTwenty: RoundedButtonProps['onPress'] = () => {
-    setMinutes(20);
+  const setTimeInMinutes = (timeInMinutes: number) => {
+    setMinutes(timeInMinutes);
   };
 
   useEffect(() => {
@@ -95,17 +85,23 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
           <RoundedButton
             size={75}
             title="5"
-            onPress={setFive}
+            onPress={() => {
+              setTimeInMinutes(5);
+            }}
           />
           <RoundedButton
             size={75}
             title="10"
-            onPress={setTen}
+            onPress={() => {
+              setTimeInMinutes(10);
+            }}
           />
           <RoundedButton
             size={75}
             title="20"
-            onPress={setTwenty}
+            onPress={() => {
+              setTimeInMinutes(20);
+            }}
           />
         </View>
         <View style={styles.buttonContainer}>

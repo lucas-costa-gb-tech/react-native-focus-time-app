@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 import type { SubjectItem } from './types';
 
-export const subjectsAtom = atom({
+export const subjectsAtom = atom<SubjectItem[]>({
   key: 'subjectsAtom',
-  default: [] as SubjectItem[],
+  default: [],
 });

@@ -12,8 +12,8 @@ export type BasicProps = {
 export default function Basic({ children }: BasicProps) {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
       {children}
+      <StatusBar barStyle="light-content" />
     </SafeAreaView>
   );
 }

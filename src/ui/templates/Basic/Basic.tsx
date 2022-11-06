@@ -1,12 +1,13 @@
-import * as React from 'react';
 import { Platform, StyleSheet, StatusBar } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import { palette } from '../../../utils/constants/ui';
 
-interface BasicProps {
-  children: React.ReactNode;
-}
+import type { ReactNode } from 'react';
+
+export type BasicProps = {
+  children: ReactNode;
+};
 
 export default function Basic({ children }: BasicProps) {
   return (

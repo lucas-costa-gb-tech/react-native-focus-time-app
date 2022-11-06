@@ -14,7 +14,6 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import type { StackParamList } from '../../../navigation';
 import type { SubjectItem } from '../../../state/subjects/types';
-import type { RoundedButtonProps } from '../../components';
 
 export type HomeProps = NativeStackScreenProps<StackParamList, 'Home'>;
 
@@ -22,7 +21,7 @@ export default function Home({ navigation }: HomeProps) {
   const [subjects, setSubjects] = useRecoilState(subjectsAtom);
   const [subjectTitle, setSubjectTitle] = useState<string>('');
 
-  const handlePress: RoundedButtonProps['onPress'] = () => {
+  const handlePress = () => {
     const currentSubjectId = uuidv4();
     const currentSubject: SubjectItem = {
       id: currentSubjectId,

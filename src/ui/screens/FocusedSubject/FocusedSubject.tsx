@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, Vibration, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { ProgressBar } from 'react-native-paper';
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { subjectsAtom } from '../../../state/subjects';
 import { palette } from '../../../utils/constants/ui';
@@ -53,7 +53,7 @@ export default function FocusedSubject({ route }: FocusedSubjectProps) {
 
   useEffect(() => {
     if (isStarted) {
-      activateKeepAwake();
+      activateKeepAwakeAsync();
     } else {
       deactivateKeepAwake();
     }
